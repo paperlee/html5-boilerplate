@@ -8,6 +8,12 @@ var IMG_RIGHT_EDGE = -(IMG_SCALE-1)*100; // -40%
 var TILT_LEFT_EDGE = 8;
 var TILT_RIGHT_EDGE = -8;
 
+//navbar height control
+var NAVBAR_MIN_HEIGHT = 44;
+var NAVBAR_MAX_HEIGHT = 180;
+
+
+
 prefix.push($('#doSupport').html());
 prefix.push($('#doTiltLR').html());
 prefix.push($('#doTiltFB').html());
@@ -50,3 +56,20 @@ function devOrientHandler(evt){
 		$('img#post').css('left',angle+'%');
 	
 }
+
+$(document).ready(function(){
+	//init
+	//$('#navbar').hide();
+	$(document).bind('touchmove',function(e){
+		console.log($(document).scrollTop());
+		if ($(document).scrollTop() >= NAVBAR_MAX_HEIGHT-NAVBAR_MIN_HEIGHT){
+			$('#navbar').height(NAVBAR_MIN_HEIGHT);
+		} else if ($(document).scrollTop() <= 0){
+			$('#navbar').height(NAVBAR_MAX_HEIGHT)
+		} else {
+			$('#navbar').height(NAVBAR_MAX_HEIGHT-$(document).scrollTop());
+		}
+		
+		
+	});
+});

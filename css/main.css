@@ -11,7 +11,7 @@
    ========================================================================== */
 
 html {
-    color: #222;
+    color:#36a9e1;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -19,6 +19,7 @@ html {
 body{
 	margin:0;
 	padding:0;
+	background:black;
 }
 
 /*
@@ -26,6 +27,27 @@ body{
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
+
+#navbar{
+	position:fixed;
+	top:0;
+	width:100%;
+	height:180px;
+	background:black;
+}
+
+#about_box{
+	width:100%;
+	height:180px;
+	background:#111111;
+	visibility:hidden;
+}
+
+.case_box{
+	width:100%;
+	height:160px;
+	background:#c762fb;
+}
 
 ::-moz-selection {
     background: #b3d4fc;

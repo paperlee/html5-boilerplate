@@ -82,7 +82,11 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#floor1_box').click(function(e){
-		$('#floor1_detail_box').slideDown('fast');
+	$('#floor1_box>.case_description_box').click(function(e){
+		$(this).children().animate({
+			top:'+60px'
+		},'slow');
+		$(this).fadeOut('slow');
+		$('#floor1_detail_box').slideDown('slow');
 	});
 });

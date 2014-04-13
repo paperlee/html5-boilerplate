@@ -60,7 +60,7 @@ function devOrientHandler(evt){
 $(document).ready(function(){
 	//init
 	//$('#navbar').hide();
-	$(document).bind('touchmove',function(e){
+	$(document).on('touchmove',function(e){
 		console.log($(document).scrollTop());
 		if ($(document).scrollTop() >= NAVBAR_MAX_HEIGHT-NAVBAR_MIN_HEIGHT){
 			$('#navbar').height(NAVBAR_MIN_HEIGHT);
@@ -69,7 +69,20 @@ $(document).ready(function(){
 		} else {
 			$('#navbar').height(NAVBAR_MAX_HEIGHT-$(document).scrollTop());
 		}
-		
-		
+	});
+	
+	$(document).on('touchend',function(e){
+		// To prevent in-smooth scroll evt 
+		if ($(document).scrollTop() >= NAVBAR_MAX_HEIGHT-NAVBAR_MIN_HEIGHT){
+			$('#navbar').height(NAVBAR_MIN_HEIGHT);
+		} else if ($(document).scrollTop() <= 0){
+			$('#navbar').height(NAVBAR_MAX_HEIGHT)
+		} else {
+			$('#navbar').height(NAVBAR_MAX_HEIGHT-$(document).scrollTop());
+		}
+	});
+	
+	$('#floor1_box').click(function(e){
+		$('#floor1_detail_box').slideDown('fast');
 	});
 });

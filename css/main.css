@@ -80,6 +80,18 @@ body{
 
 .detail_box{
 	display:none;
+	padding:0 16px 10px 16px;
+}
+
+.detail_box a.close_button{
+	display:block;
+	width:100%;
+	height:30px;
+	text-align:center;
+	font-size:1.4em;
+	color:aqua;
+	text-decoration:none;
+	padding-top:14px;
 }
 
 ::-moz-selection {

@@ -84,9 +84,17 @@ $(document).ready(function(){
 	
 	$('#floor1_box>.case_description_box').click(function(e){
 		$(this).children().animate({
-			top:'+60px'
+			top:'+=60px'
+		},'fast');
+		$(this).fadeOut('fast');
+		$('#floor1_detail_box').delay(100).slideDown('slow');
+	});
+	
+	$('#floor1_detail_box>a.close_button').click(function(e){
+		$(this).parent().slideUp('fast');
+		$('#floor1_box>.case_description_box').delay(100).fadeIn('slow');
+		$('#floor1_box>.case_description_box').children().animate({
+			top:'-=60px'
 		},'slow');
-		$(this).fadeOut('slow');
-		$('#floor1_detail_box').slideDown('slow');
 	});
 });

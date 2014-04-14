@@ -12,7 +12,27 @@ var TILT_RIGHT_EDGE = -8;
 var NAVBAR_MIN_HEIGHT = 44;
 var NAVBAR_MAX_HEIGHT = 180;
 
+//TODO: use device width
+var IMG_WIDTH = 320;
 
+//TODO: mutiple cases
+var current_img = [0];
+
+//TODO: mutiple cases
+var max_imgs = [3];
+
+var speed = 500;
+
+//TODO: mutiple cases
+var pics = [];
+
+var swipeOptions=
+{
+	triggerOnTouchEnd : true,	
+	swipeStatus : swipeStatus,
+	allowPageScroll:"vertical",
+	threshold:75			
+}
 
 prefix.push($('#doSupport').html());
 prefix.push($('#doTiltLR').html());
@@ -61,7 +81,7 @@ $(document).ready(function(){
 	//init
 	//$('#navbar').hide();
 	$(document).on('touchmove',function(e){
-		console.log($(document).scrollTop());
+		//console.log($(document).scrollTop());
 		if ($(document).scrollTop() >= NAVBAR_MAX_HEIGHT-NAVBAR_MIN_HEIGHT){
 			$('#navbar').height(NAVBAR_MIN_HEIGHT);
 		} else if ($(document).scrollTop() <= 0){
@@ -97,4 +117,69 @@ $(document).ready(function(){
 			top:'-=60px'
 		},'slow');
 	});
+	
+	pics[0] = $('#floor1_box>.pics_box');
+	pics[0].swipe( swipeOptions );
+	
+	
 });
+
+/**
+* Catch each phase of the swipe.
+* move : we drag the div.
+* cancel : we animate back to where we were
+* end : we animate to the next image
+*/			
+function swipeStatus(event, phase, direction, distance)
+{
+	//If we are moving before swipe, and we are going Lor R in X mode, or U or D in Y mode then drag.
+	if( phase=="move" && (direction=="left" || direction=="right") )
+	{
+		var duration=0;
+		
+		if (direction == "left")
+			scrollImages((IMG_WIDTH * current_img[0]) + distance, duration);
+		
+		else if (direction == "right")
+			scrollImages((IMG_WIDTH * current_img[0]) - distance, duration);
+		
+	}
+	
+	else if ( phase == "cancel")
+	{
+		scrollImages(IMG_WIDTH * current_img[0], speed);
+	}
+	
+	else if ( phase =="end" )
+	{
+		if (direction == "right")
+			previousImage();
+		else if (direction == "left")			
+			nextImage();
+	}
+}
+
+function previousImage()
+{
+	current_img[0] = Math.max(current_img[0]-1, 0);
+	scrollImages( IMG_WIDTH * current_img[0], speed);
+}
+
+function nextImage()
+{
+	current_img[0] = Math.min(current_img[0]+1, max_imgs[0] - 1);
+	scrollImages( IMG_WIDTH * current_img[0], speed);
+}
+
+/**
+* Manuallt update the position of the imgs on drag
+*/
+function scrollImages(distance, duration)
+{
+	pics[0].css("-webkit-transition-duration", (duration/1000).toFixed(1) + "s");
+	
+	//inverse the number we set in the css
+	var value = (distance<0 ? "" : "-") + Math.abs(distance).toString();
+	
+	pics[0].css("-webkit-transform", "translate3d("+value +"px,0px,0px)");
+}

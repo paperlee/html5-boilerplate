@@ -35,6 +35,7 @@ body{
 	height:180px;
 	background:black;
 	z-index:1000;
+	-webkit-transform: translate3d(0px,0px,0px);
 }
 
 #about_box{
@@ -46,8 +47,9 @@ body{
 
 .case_box{
 	width:100%;
-	height:160px;
+	height:178px;
 	background:#c762fb;
+	overflow:hidden;
 }
 
 .pics_box{
@@ -61,7 +63,7 @@ body{
 	position:relative;
 	top:-80px;
 	overflow:hidden;
-	background:rgba(255,255,255,0.6);
+	background:rgba(255,255,255,0.8);
 }
 
 .case_description_box h1{
@@ -92,6 +94,31 @@ body{
 	color:aqua;
 	text-decoration:none;
 	padding-top:14px;
+}
+
+.case_box>div.pics_box{
+	width:970px;
+	height:auto;
+	float:left;
+	clear:both;
+	
+	
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease-out;
+	padding:0px;
+	margin:0px;
+	
+	-webkit-transform: translate3d(0px,0px,0px); 
+}
+
+.case_box>div.pics_box>img{
+	width:320px;
+	height:auto;
+	margin:0;
+	padding:0;
+	
+	-webkit-transform: translate3d(0px,0px,0px); 
 }
 
 ::-moz-selection {

@@ -160,6 +160,9 @@ function devOrientHandler(evt){
 
 $(document).ready(function(){
 	//init
+	
+	IMG_WIDTH = $(window).width();
+	
 	//$('#navbar').hide();
 	$(document).on('touchmove',function(e){
 		//console.log($(document).scrollTop());
@@ -197,6 +200,7 @@ $(document).ready(function(){
 		$('#floor1_box>.case_description_box').children().animate({
 			top:'-=60px'
 		},'slow');
+		return false;
 	});
 	
 	$('#floor1_detail_box>div.shadow').click(function(e){
@@ -222,6 +226,7 @@ $(document).ready(function(){
 	// Apply action in each case
 	$("div.case_whole_box").each(function(key,element){
 		//alert($(element).find("div.pics_box").length);
+		
 		// assign pcis
 		var pics_temp = cases_data[key]["bg_url"];
 		var id_base = cases_data[key]["img_id"];
@@ -238,6 +243,31 @@ $(document).ready(function(){
 		$(element).find("div.pics_box").attr("id","case_pics"+key);
 		pics.push($(element).find("div.pics_box"));
 		pics[key].swipe( swipeOptions );
+		
+		// show/hide detail box
+		$(element).find('div.case_description_box').click(function(e){
+			$(this).children().animate({
+				top:'+=60px'
+			},'fast');
+			$(this).fadeOut('fast');
+			$(element).find('div.detail_box').delay(100).slideDown('slow');
+		});
+	
+		$(element).find('a.close_button').click(function(e){
+			$(this).parent().slideUp('fast');
+			$(element).find('div.case_description_box').delay(100).fadeIn('slow');
+			$(element).find('div.case_description_box').children().animate({
+				top:'-=60px'
+			},'slow');
+		});
+	
+		$(element).find('div.shadow').click(function(e){
+			$(this).parent().slideUp('fast');
+			$(element).find('div.case_description_box').delay(100).fadeIn('slow');
+			$(element).find('div.case_description_box').children().animate({
+				top:'-=60px'
+			},'slow');
+		});
 	});
 	
 });

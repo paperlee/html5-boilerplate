@@ -97,10 +97,10 @@ var NAVBAR_MAX_HEIGHT = 213;
 var IMG_WIDTH = 320;
 
 //TODO: mutiple cases
-var current_img = [0];
+var current_img = [];
 
 //TODO: mutiple cases
-var max_imgs = [3];
+var max_imgs = [];
 
 var speed = 500;
 
@@ -207,8 +207,8 @@ $(document).ready(function(){
 		},'slow');
 	});
 	
-	pics[0] = $('#floor1_box>.pics_box');
-	pics[0].swipe( swipeOptions );
+	//pics[0] = $('#floor1_box>.pics_box');
+	//pics[0].swipe( swipeOptions );
 	
 	// Assign case data
 	for (var key in cases_data){
@@ -216,21 +216,28 @@ $(document).ready(function(){
 		
 		//set current viewing image at
 		current_img.push(0);
+		
 	}
 	
 	// Apply action in each case
 	$("div.case_whole_box").each(function(key,element){
 		//alert($(element).find("div.pics_box").length);
 		// assign pcis
-		var pics = cases_data[key]["bg_url"];
+		var pics_temp = cases_data[key]["bg_url"];
 		var id_base = cases_data[key]["img_id"];
-		var pic;
-		$(element).find("div.pics_box").width(IMG_WIDTH*pics.length);
-		for (var i in pics){
-			pic = $("<img />").addClass("case_pic").attr("id",id_base+i).attr("src",pics[i]);
-			$(element).find("div.pics_box").append(pic);
+		var pic_temp;
+		
+		max_imgs.push(pics_temp.length)
+		
+		$(element).find("div.pics_box").width(IMG_WIDTH*pics_temp.length);
+		for (var i in pics_temp){
+			pic_temp = $("<img />").addClass("case_pic").attr("id",id_base+i).attr("src",pics_temp[i]);
+			$(element).find("div.pics_box").append(pic_temp);
 		}
 		
+		$(element).find("div.pics_box").attr("id","case_pics"+key);
+		pics.push($(element).find("div.pics_box"));
+		pics[key].swipe( swipeOptions );
 	});
 	
 });
@@ -243,54 +250,57 @@ $(document).ready(function(){
 */			
 function swipeStatus(event, phase, direction, distance)
 {
+	//Get current interaction pics box id
+	var current_key = parseInt($(this).attr('id').split("case_pics")[1],10);
+	
 	//If we are moving before swipe, and we are going Lor R in X mode, or U or D in Y mode then drag.
 	if( phase=="move" && (direction=="left" || direction=="right") )
 	{
 		var duration=0;
 		
 		if (direction == "left")
-			scrollImages((IMG_WIDTH * current_img[0]) + distance, duration);
+			scrollImages((IMG_WIDTH * current_img[current_key]) + distance, duration, current_key);
 		
 		else if (direction == "right")
-			scrollImages((IMG_WIDTH * current_img[0]) - distance, duration);
+			scrollImages((IMG_WIDTH * current_img[current_key]) - distance, duration, current_key);
 		
 	}
 	
 	else if ( phase == "cancel")
 	{
-		scrollImages(IMG_WIDTH * current_img[0], speed);
+		scrollImages(IMG_WIDTH * current_img[current_key], speed, current_key);
 	}
 	
 	else if ( phase =="end" )
 	{
 		if (direction == "right")
-			previousImage();
+			previousImage(current_key);
 		else if (direction == "left")			
-			nextImage();
+			nextImage(current_key);
 	}
 }
 
-function previousImage()
+function previousImage(current_key)
 {
-	current_img[0] = Math.max(current_img[0]-1, 0);
-	scrollImages( IMG_WIDTH * current_img[0], speed);
+	current_img[current_key] = Math.max(current_img[current_key]-1, 0);
+	scrollImages( IMG_WIDTH * current_img[current_key], speed, current_key);
 }
 
-function nextImage()
+function nextImage(current_key)
 {
-	current_img[0] = Math.min(current_img[0]+1, max_imgs[0] - 1);
-	scrollImages( IMG_WIDTH * current_img[0], speed);
+	current_img[current_key] = Math.min(current_img[current_key]+1, max_imgs[current_key] - 1);
+	scrollImages( IMG_WIDTH * current_img[current_key], speed, current_key);
 }
 
 /**
 * Manuallt update the position of the imgs on drag
 */
-function scrollImages(distance, duration)
+function scrollImages(distance, duration, current_key)
 {
-	pics[0].css("-webkit-transition-duration", (duration/1000).toFixed(1) + "s");
+	pics[current_key].css("-webkit-transition-duration", (duration/1000).toFixed(1) + "s");
 	
 	//inverse the number we set in the css
 	var value = (distance<0 ? "" : "-") + Math.abs(distance).toString();
 	
-	pics[0].css("-webkit-transform", "translate3d("+value +"px,0px,0px)");
+	pics[current_key].css("-webkit-transform", "translate3d("+value +"px,0px,0px)");
 }

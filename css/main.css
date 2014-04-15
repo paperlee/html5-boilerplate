@@ -11,7 +11,7 @@
    ========================================================================== */
 
 html {
-    color: #222;
+    color:#36a9e1;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -19,6 +19,9 @@ html {
 body{
 	margin:0;
 	padding:0;
+	background:black;
+	font-size:14px;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /*
@@ -26,6 +29,204 @@ body{
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
+
+#navbar{
+	position:fixed;
+	top:0;
+	width:100%;
+	height:213px;
+	background:black;
+	z-index:1000;
+	overflow:hidden;
+}
+
+#navbar>img{
+	position:absolute;
+	-webkit-transform: translate3d(0px,0px,0px);
+}
+
+#navbar>div{
+	position:absolute;
+	top:10px;
+}
+
+#about_box{
+	width:100%;
+	height:213px;
+	background:#111111;
+	visibility:hidden;
+}
+
+#about_content{
+	width:100%;
+	z-index:1001;
+}
+
+#about_content>#links{
+	height:44px;
+	overflow:hidden;
+	
+}
+
+#about_content>#links>a{
+	display:block;
+	width:44px;
+	height:44px;
+	float:left;
+}
+
+#about_content h1{
+	margin-top:0;
+	margin-left:10px;
+	font-family: 'Lobster Two', cursive;
+}
+
+#about_content>p{
+	margin:2px 10px;
+	padding:0;
+}
+
+#about_content>#links>a#cv{
+	background:url("../../images/btnCV.png") no-repeat center center;
+	background-size:36px 36px;
+}
+
+#about_content>#links>a#mail{
+	background:url("../../images/btnMail.png") no-repeat center center;
+	background-size:36px 36px;
+}
+
+#about_content>#links>a#twitter{
+	background:url("../../images/btnTwitter.png") no-repeat center center;
+	background-size:36px 36px;
+}
+
+#about_content>#links>a#linkedin{
+	background:url("../../images/btnLinkedin.png") no-repeat center center;
+	background-size:36px 36px;
+}
+
+#about_content>#links>a#blog{
+	background:url("../../images/btnBlogger.png") no-repeat center center;
+	background-size:36px 36px;
+}
+
+.case_box{
+	width:100%;
+	height:auto;
+	background:#888888;
+	overflow:hidden;
+	position:relative;
+}
+
+.pics_box{
+	width:100%;
+	height:auto;
+}
+
+.case_description_box{
+	width:100%;
+	height:80px;
+	position:absolute;
+	bottom:0px;
+	overflow:hidden;
+	background:rgba(255,255,255,0.6);
+}
+
+.case_description_box a{
+	color:#36a9e1;
+}
+
+.case_description_box h1{
+	font-size:1.4em;
+	margin-top:4px;
+	margin-bottom:4px;
+	font-weight:normal;
+	font-family: 'Lobster Two', cursive;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.case_description_box>div.case_summary{
+	top:30px;
+	position:absolute;
+	height:20px;
+	overflow:hidden;
+	margin-left:10px;
+	margin-right:10px;
+}
+
+.case_description_box>div.case_title{
+	top:0px;
+	position:absolute;
+}
+
+.case_description_box p, .case_description_box h4{
+	font-size:1em;
+	font-weight:lighter;
+	margin-top:2px;
+	margin-bottom:2px;
+}
+
+.detail_box{
+	display:none;
+	padding:0 16px 10px 16px;
+	background:#b8b0cd;
+	position:relative;
+	color:#05115a;
+}
+
+.detail_box .shadow{
+	width:100%;
+	height:44px;
+	background:-webkit-linear-gradient(top, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.2) 12%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 100%);
+	background:linear-gradient(to bottom, rgba(0,0,0,0.4) 0%,rgba(0,0,0,0.2) 12%,rgba(0,0,0,0) 32%,rgba(0,0,0,0) 100%);
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+.detail_box a.close_button{
+	display:block;
+	width:100%;
+	height:44px;
+	text-align:center;
+	font-size:1.4em;
+	background:url('../img/btnHide.png') no-repeat center center;
+	
+	background-size:36px 36px;
+	text-decoration:none;
+}
+
+.detail_box h1.detail_title{
+	font-family: 'Lobster Two', cursive;
+	margin-top:0;
+}
+
+.case_box>div.pics_box{
+	width:970px;
+	height:auto;
+	float:left;
+	clear:both;
+	
+	
+	-webkit-transition-property: -webkit-transform;
+	-webkit-transition-duration: 0.5s;
+	-webkit-transition-timing-function: ease-out;
+	padding:0px;
+	margin:0px;
+	
+	-webkit-transform: translate3d(0px,0px,0px); 
+}
+
+.case_box>div.pics_box>img{
+	width:320px;
+	height:auto;
+	margin:0;
+	padding:0;
+	
+	-webkit-transform: translate3d(0px,0px,0px); 
+}
 
 ::-moz-selection {
     background: #b3d4fc;

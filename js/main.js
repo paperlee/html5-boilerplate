@@ -25,8 +25,8 @@ var cases_data = [
 			bg_url:['../images/s/touchbook2.jpg','../images/s/touchbook3.jpg','../images/s/touchbook4.jpg'],
 			img_id:'bg_touchbook',
 			canvas_id:'canvas_touchbook',
-			base_color:'#b8b0cd',
-			text_color:'#05115a'
+			base_color:'#d9dade',
+			text_color:'#13636b'
 		},
 		{
 				title:'MobiApps',
@@ -35,8 +35,8 @@ var cases_data = [
 				bg_url:['../images/s/mobiapps10.jpg','../images/s/mobiapps8.jpg','../images/s/mobiapps9.jpg','../images/s/mobiapps11.jpg','../images/s/mobiapps12.jpg','../images/s/mobiapps4.jpg','../images/s/mobiapps5.jpg'],
 				img_id:'bg_mobiapps_app',
 				canvas_id:'canvas_mobiapps_app',
-				base_color:'#b8b0cd',
-				text_color:'#05115a'
+				base_color:'#ddd3d3',
+				text_color:'#6a1050'
 			},
 {
 		title:'Pilotfish MCBW event',
@@ -45,8 +45,8 @@ var cases_data = [
 		bg_url:['../images/s/mcbw-1.jpg','../images/s/mcbw-2.jpg'],
 		img_id:'bg_mcbw',
 		canvas_id:'canvas_mcbw',
-		base_color:'#b8b0cd',
-		text_color:'#05115a'
+		base_color:'#dbd8d3',
+		text_color:'#683011'
 	},
 	{
 			title:'Pilotfish Mobile Website',
@@ -55,8 +55,8 @@ var cases_data = [
 			bg_url:['../images/s/pf_mobile1.jpg','../images/s/pf_mobile5.jpg','../images/s/pf_mobile6.jpg','../images/s/pf_mobile8.jpg','../images/s/pf_mobile4.jpg'],
 			img_id:'bg_pf_mobile',
 			canvas_id:'canvas_pf_mobile',
-			base_color:'#b8b0cd',
-			text_color:'#05115a'
+			base_color:'#e0cbb7',
+			text_color:'#6d1702'
 		},
 	
 	{
@@ -66,8 +66,8 @@ var cases_data = [
 			bg_url:['../images/s/mobiapps_web1.jpg','../images/s/mobiapps_web2.jpg','../images/s/mobiapps_web3.jpg'],
 			img_id:'bg_mobiapps',
 			canvas_id:'canvas_mobiapps',
-			base_color:'#b8b0cd',
-			text_color:'#05115a'
+			base_color:'#c8d5cc',
+			text_color:'#29620e'
 		},
 		{
 				title:'DDD',
@@ -75,8 +75,8 @@ var cases_data = [
 				bg_url:['../images/s/ddd3.jpg','../images/s/ddd2.jpg','../images/s/ddd1.jpg','../images/s/ddd_3.jpg'],
 				img_id:'bg_ddd',
 				canvas_id:'canvas_ddd',
-				base_color:'#b8b0cd',
-				text_color:'#05115a'
+				base_color:'#87b2c7',
+				text_color:'#032b42'
 			}];
 
 var prefix = [];
@@ -264,6 +264,10 @@ $(document).ready(function(){
 		$(element).find("div.pics_box").attr("id","case_pics"+key);
 		pics.push($(element).find("div.pics_box"));
 		pics[key].swipe( swipeOptions );
+		
+		// Assign detail box colors
+		$(element).children('div.detail_box').css('backgroundColor',cases_data[key]['base_color']).css('color',cases_data[key]['text_color']);
+		$(element).children('div.detail_box').find('a').css('color',cases_data[key]['text_color']);
 		
 		// show/hide detail box
 		$(element).find('div.case_description_box').click(function(e){

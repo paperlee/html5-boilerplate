@@ -107,6 +107,8 @@ var speed = 500;
 //TODO: mutiple cases
 var pics = [];
 
+var isAndroid = false;
+
 var swipeOptions=
 {
 	triggerOnTouchEnd : true,	
@@ -161,6 +163,11 @@ function devOrientHandler(evt){
 $(document).ready(function(){
 	//init
 	
+	// check if running on android
+	var ua = navigator.userAgent.toLowerCase();
+	isAndroid = ua.indexOf("android") > -1;
+	
+	
 	IMG_WIDTH = $(window).width();
 	
 	//$('#navbar').hide();
@@ -185,6 +192,20 @@ $(document).ready(function(){
 			$('#navbar').height(NAVBAR_MAX_HEIGHT-$(document).scrollTop());
 		}
 	});
+	
+	if (isAndroid){
+		//alert('its on android');
+		$(document).scroll(function(e){
+			//console.log($(document).scrollTop());
+			if ($(document).scrollTop() >= NAVBAR_MAX_HEIGHT-NAVBAR_MIN_HEIGHT){
+				$('#navbar').height(NAVBAR_MIN_HEIGHT);
+			} else if ($(document).scrollTop() <= 0){
+				$('#navbar').height(NAVBAR_MAX_HEIGHT)
+			} else {
+				$('#navbar').height(NAVBAR_MAX_HEIGHT-$(document).scrollTop());
+			}
+		});
+	}
 	
 	$('#floor1_box>.case_description_box').click(function(e){
 		$(this).children().animate({
@@ -236,7 +257,7 @@ $(document).ready(function(){
 		
 		$(element).find("div.pics_box").width(IMG_WIDTH*pics_temp.length);
 		for (var i in pics_temp){
-			pic_temp = $("<img />").addClass("case_pic").attr("id",id_base+i).attr("src",pics_temp[i]);
+			pic_temp = $("<img />").addClass("case_pic").attr("id",id_base+i).attr("src",pics_temp[i]).css('width',IMG_WIDTH);
 			$(element).find("div.pics_box").append(pic_temp);
 		}
 		

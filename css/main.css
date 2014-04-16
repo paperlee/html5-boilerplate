@@ -107,6 +107,16 @@ body{
 	background-size:36px 36px;
 }
 
+#about_content a#desktop_web{
+	display:block;
+	width:97%;
+	height:44px;
+	text-align:right;
+	color:#36a9e1;
+	margin-right:3%;
+	margin-top:18px;
+}
+
 .case_box{
 	width:100%;
 	height:auto;
